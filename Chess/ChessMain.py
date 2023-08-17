@@ -12,13 +12,11 @@ SQ_SIZE = HEIGHT // DIMENSION
 MAX_FPS = 15
 IMAGES = {}
 
-
 def load_images(): #INITIALIZES A GLOBAL DICTIONARY WITH IMAGES OF THE PIECES
     DATA_DIR = os.path.abspath(os.path.join(os.path.dirname("bB.png"), 'images'))
     for fileName in os.listdir(DATA_DIR):
         fileName = fileName[:2]
         IMAGES[fileName] = p.transform.scale(p.image.load(f"images/{fileName}.png"), (SQ_SIZE, SQ_SIZE))
-
 
 def main():
     p.init()
@@ -99,11 +97,9 @@ def main():
         clock.tick(MAX_FPS)
         p.display.flip()
 
-
 """
 highlight square selected and possible moves for the piece selecte
 """
-
 
 def highlightSquares(screen, gs, validMoves, sqSelected):
     if sqSelected != ():
@@ -119,12 +115,10 @@ def highlightSquares(screen, gs, validMoves, sqSelected):
                 if move.startRow == r and move.startCol == c:
                     screen.blit(s, (SQ_SIZE * move.endCol, SQ_SIZE * move.endRow))
 
-
 def drawGamestate(screen, gs, validMoves, sqSelected):
     drawBoard(screen)
     highlightSquares(screen, gs, validMoves, sqSelected)
     drawPieces(screen, gs.board)
-
 
 def drawBoard(screen):
     colors = [p.Color("white"), p.Color("grey")]
@@ -133,13 +127,11 @@ def drawBoard(screen):
             color = colors[((row + column) % 2)]
             p.draw.rect(screen, color, p.Rect(column * SQ_SIZE, row * SQ_SIZE, SQ_SIZE, SQ_SIZE))
 
-
 def drawPieces(screen, board):
     for i in range(DIMENSION):
         for j in range(DIMENSION):
             if board[i][j] != "--":
                 screen.blit(IMAGES[board[i][j]], p.Rect(j * SQ_SIZE, i * SQ_SIZE, SQ_SIZE, SQ_SIZE))
-
 
 def drawText(screen, text):
     font = p.font.SysFont("Helvitca", 32, True, False)
@@ -147,7 +139,5 @@ def drawText(screen, text):
     textLocation = p.Rect(0, 0, WIDTH, HEIGHT).move(WIDTH / 2 - textObject.get_width() / 2,
                                                     HEIGHT / 2 - textObject.get_height() / 2)
     screen.blit(textObject, textLocation)
-
-
 
 main()
