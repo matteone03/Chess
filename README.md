@@ -1,2 +1,2 @@
 # Chess
-Chess game made with python, still working on it
+Chess game made with python.
